@@ -1,0 +1,21 @@
+version: '3'
+services:
+  fetch_blog_pages:
+    build:
+      context: ./scripts
+      dockerfile: Dockerfile
+    command: python fetch-blog-pages.py
+    volumes:
+      - type: bind
+        source: ./output
+        target: /app/output
+    env_file:
+      - env.list
+
+  update_blog_page:
+    build:
+      context: ./scripts
+      dockerfile: Dockerfile
+    command: python update-blog-page.py
+    env_file:
+      - env.list
